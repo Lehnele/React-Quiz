@@ -1,13 +1,19 @@
 .Backdrop {
-    z-index: 50;
+    z-index: -10;
     background: rgba(0, 0, 0, .7);
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    /*transition: opacity .22s ease-in;*/
     cursor:pointer;
+
+    opacity: 0;
+    transition: all .22s ease-in;
 }
 
+.Backdrop.close {
+    z-index: 50;
+    opacity: 1;
+}
 
