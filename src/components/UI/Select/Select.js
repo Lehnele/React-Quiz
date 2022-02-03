@@ -6,7 +6,7 @@ const Select = props => {
 
     return (
         <div className={classes.Select}>
-            <label htmlFor={htmlFor}>props.label</label>
+            <label htmlFor={htmlFor}>{props.label}</label>
             <select
                 id={htmlFor}
                 value={props.value}
