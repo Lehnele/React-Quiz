@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
+import React,{ useState, useEffect} from 'react';
 import classes from './QuizList.module.css';
 import { NavLink } from 'react-router-dom';
 import Loader from '../../components/UI/Loader/Loader';
-import axios from 'axios';
+import axios from '../../axios/axios-quiz';
 
-export default class QuizList extends Component {
+const QuizList = () => {
 
-    state = {
+    const [state, setState] = useState({
         quizzes: [],
         loading: true
-    }
+    })
 
-    renderQuizzes() {
-        return this.state.quizzes.map(quiz => {
+    function renderQuizzes() {
+        return state.quizzes.map(quiz => {
             return (
                 <li
                     key={quiz.id}
@@ -25,42 +25,46 @@ export default class QuizList extends Component {
         })
     }
 
-    async componentDidMount() {
-        try {
-            const response = await axios.get('https://react-quiz-40305-default-rtdb.europe-west1.firebasedatabase.app/quizzes.json')
+    useEffect(() => {
+        async function axiosData() {
+            try {
+                const response = await axios.get('/quizzes.json')
 
-            const quizzes = []
+                const quizzes = []
 
-            Object.keys(response.data).forEach((key, index) => {
-                quizzes.push({
-                    id: key,
-                    name: `Тест №${index + 1}`
+                Object.keys(response.data).forEach((key, index) => {
+                    quizzes.push({
+                        id: key,
+                        name: `Тест №${index + 1}`
+                    })
                 })
-            })
-            this.setState({
-                quizzes,
-                loading: false
-            })
-        } catch (e) {
-            console.log(e)
+                setState(state => ({
+                    ...state,
+                    quizzes,
+                    loading: false
+                }))
+            } catch (e) {
+                console.log(e)
+            }
         }
+        axiosData()
 
-    }
+    })
 
-    render() {
-        return (
-            <div className={classes.QuizList}>
-                <div>
-                    <h1>Список тестов</h1>
+    return (
+        <div className={classes.QuizList}>
+            <div>
+                <h1>Список тестов</h1>
 
-                    { this.state.loading
-                        ? <Loader/>
-                        : <ul>
-                            { this.renderQuizzes() }
-                          </ul>
-                    }
-                </div>
+                { state.loading
+                    ? <Loader/>
+                    : <ul>
+                        { renderQuizzes() }
+                    </ul>
+                }
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
+
+export default QuizList;
