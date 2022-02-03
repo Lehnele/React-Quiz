@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import classes from './Quiz.module.css';
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
 import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz';
@@ -6,7 +7,7 @@ import Loader from '../../components/UI/Loader/Loader';
 import axios from '../../axios/axios-quiz';
 
 
-const Quiz = (props) => {
+const Quiz = () => {
     const [state, setState] = useState({
         results: {}, //{ [id]: 'success' or 'error' }
         isFinished: false,
@@ -15,6 +16,8 @@ const Quiz = (props) => {
         quiz: [],
         loading: true
     });
+
+
 
     const onAnswerClickHandler = answerId => {
         // debug double click
@@ -78,10 +81,15 @@ const Quiz = (props) => {
         }))
     }
 
-    useEffect(() => {
-        async function axiosData() {
+
+    const {id} = useParams();
+    console.log(id)
+
+    useEffect((id) => {
+
+        async function axiosData(id) {
             try {
-                const response = await axios.get(`/quizzes/${props.match.params.id}.json`)
+                const response = await axios.get(`/quizzes/${id}.json`)
 
                 const quiz = response.data
 
@@ -91,12 +99,11 @@ const Quiz = (props) => {
                     loading: false
                 }))
             } catch (e) {
-                console.log(props.match)
                 console.log(e)
             }
         }
-        axiosData()
-    })
+        axiosData(id)
+    }, [])
 
     return (
         <div className={classes.Quiz}>

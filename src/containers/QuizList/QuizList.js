@@ -48,8 +48,7 @@ const QuizList = () => {
             }
         }
         axiosData()
-
-    })
+    }, [])
 
     return (
         <div className={classes.QuizList}>
