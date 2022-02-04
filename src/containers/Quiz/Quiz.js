@@ -15,6 +15,9 @@ const Quiz = () => {
         quiz: [],
         loading: true
     });
+
+    const { id } = useParams()
+
     const onAnswerClickHandler = answerId => {
         // debug double click
         if(state.answerState) {
@@ -77,12 +80,10 @@ const Quiz = () => {
         }))
     }
 
-    const { id } = useParams()
     useEffect(() => {
         async function axiosData (id) {
             try {
                 const response = await axios.get(`/quizzes/${id}.json`)
-                // const response = await axios.get(`/quizzes/-Mv48u63tXRgV7BT4v_H.json`)
 
                 const quiz = response.data
                 setState(state => ({
