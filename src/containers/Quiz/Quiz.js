@@ -77,21 +77,17 @@ const Quiz = () => {
         }))
     }
 
-
-    const {id} = useParams();
-    console.log('Quiz Id: ', id)
-
-    useEffect((id) => {
+    const { id } = useParams()
+    useEffect(() => {
         async function axiosData (id) {
             try {
                 const response = await axios.get(`/quizzes/${id}.json`)
                 // const response = await axios.get(`/quizzes/-Mv48u63tXRgV7BT4v_H.json`)
 
                 const quiz = response.data
-                console.log(quiz)
                 setState(state => ({
                     ...state,
-                    quiz: response.data,
+                    quiz,
                     loading: false
                 }))
             } catch (e) {
