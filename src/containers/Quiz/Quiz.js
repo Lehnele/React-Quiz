@@ -84,7 +84,7 @@ const Quiz = () => {
     useEffect((id) => {
         async function axiosData (id) {
             try {
-                // const response = await axios.get(`/quizzes/${id}.json`)
+                const response = await axios.get(`/quizzes/${id}.json`)
                 // const response = await axios.get(`/quizzes/-Mv48u63tXRgV7BT4v_H.json`)
 
                 const quiz = response.data
