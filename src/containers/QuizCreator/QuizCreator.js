@@ -53,10 +53,10 @@ const QuizCreator = () => {
             id: index,
             rightAnswerId: state.rightAnswerId,
             answers: [
-                {text: option1, id: option1.id},
-                {text: option2, id: option2.id},
-                {text: option3, id: option3.id},
-                {text: option4, id: option4.id}
+                {text: option1.value, id: option1.id},
+                {text: option2.value, id: option2.id},
+                {text: option3.value, id: option3.id},
+                {text: option4.value, id: option4.id}
             ]
         }
 
@@ -79,7 +79,7 @@ const QuizCreator = () => {
             await axios.post('/quizzes.json', state.quiz)
 
             setState(state => ({
-                ...state,
+                //...state,
                 quiz: [],
                 isFormValid: false,
                 rightAnswerId: 1,

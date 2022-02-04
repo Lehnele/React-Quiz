@@ -79,13 +79,13 @@ const Quiz = () => {
 
 
     const {id} = useParams();
-    console.log(id)
+    console.log('Quiz Id: ', id)
 
-    useEffect(async (id) => {
-        debugger
+    useEffect((id) => {
+        async function axiosData (id) {
             try {
                 // const response = await axios.get(`/quizzes/${id}.json`)
-                const response = await axios.get(`/quizzes/-Muv3y9HS9lNRDIYEYaL.json`)
+                // const response = await axios.get(`/quizzes/-Mv48u63tXRgV7BT4v_H.json`)
 
                 const quiz = response.data
                 console.log(quiz)
@@ -97,6 +97,8 @@ const Quiz = () => {
             } catch (e) {
                 console.log(e)
             }
+        }
+        axiosData(id)
     }, [id])
 
     return (
