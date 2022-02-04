@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import classes from './Drawer.module.css';
 import { NavLink } from 'react-router-dom';
 import Backdrop from '../../UI/Backdrop/Backdrop';
@@ -9,15 +9,15 @@ const links = [
     {to: '/quiz-creator',label: 'Создать тест'}
 ]
 
-class Drawer extends Component {
-    renderLinks() {
+const Drawer = (props) => {
+    function renderLinks() {
         return links.map((link, index) => {
             return (
                 <li key={index}>
                     <NavLink
                         to={link.to}
                         // className={classes.active}
-                        onClick={this.props.onClose}
+                        onClick={props.onClose}
                     >
                         {link.label}
                     </NavLink>
@@ -26,25 +26,23 @@ class Drawer extends Component {
         })
     }
 
-    render() {
-        const cls = [classes.Drawer]
+    const cls = [classes.Drawer]
 
-        if(!this.props.isOpen) {
-            cls.push(classes.close)
-        }
-
-        return (
-            <>
-                <nav className={cls.join(' ')}>
-                    <ul>
-                        { this.renderLinks() }
-                    </ul>
-                </nav>
-                {/*{ this.props.isOpen ? <Backdrop onClick={this.props.onClose}/> : null }*/}
-                <Backdrop onClick={this.props.onClose} isOpen={this.props.isOpen}/>
-            </>
-        )
+    if(!props.isOpen) {
+        cls.push(classes.close)
     }
-}
+
+    return (
+        <>
+            <nav className={cls.join(' ')}>
+                <ul>
+                    { renderLinks() }
+                </ul>
+            </nav>
+            {/*{ this.props.isOpen ? <Backdrop onClick={this.props.onClose}/> : null }*/}
+            <Backdrop onClick={props.onClose} isOpen={props.isOpen}/>
+        </>
+    )
+};
 
 export default Drawer;

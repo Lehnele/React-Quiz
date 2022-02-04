@@ -1,6 +1,6 @@
 import React,{ useState, useEffect} from 'react';
 import classes from './QuizList.module.css';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';//NavLink
 import Loader from '../../components/UI/Loader/Loader';
 import axios from '../../axios/axios-quiz';
 
@@ -17,9 +17,9 @@ const QuizList = () => {
                 <li
                     key={quiz.id}
                 >
-                    <NavLink to={'/quiz/' + quiz.id}>
+                    <Link to={`/quizzes/${quiz.id}`}>
                         {quiz.name}
-                    </NavLink>
+                    </Link>
                 </li>
             )
         })

@@ -6,7 +6,6 @@ import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz';
 import Loader from '../../components/UI/Loader/Loader';
 import axios from '../../axios/axios-quiz';
 
-
 const Quiz = () => {
     const [state, setState] = useState({
         results: {}, //{ [id]: 'success' or 'error' }
@@ -16,9 +15,6 @@ const Quiz = () => {
         quiz: [],
         loading: true
     });
-
-
-
     const onAnswerClickHandler = answerId => {
         // debug double click
         if(state.answerState) {
@@ -85,25 +81,23 @@ const Quiz = () => {
     const {id} = useParams();
     console.log(id)
 
-    useEffect((id) => {
-
-        async function axiosData(id) {
+    useEffect(async (id) => {
+        debugger
             try {
-                const response = await axios.get(`/quizzes/${id}.json`)
+                // const response = await axios.get(`/quizzes/${id}.json`)
+                const response = await axios.get(`/quizzes/-Muv3y9HS9lNRDIYEYaL.json`)
 
                 const quiz = response.data
-
+                console.log(quiz)
                 setState(state => ({
                     ...state,
-                    quiz,
+                    quiz: response.data,
                     loading: false
                 }))
             } catch (e) {
                 console.log(e)
             }
-        }
-        axiosData(id)
-    }, [])
+    }, [id])
 
     return (
         <div className={classes.Quiz}>
