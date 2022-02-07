@@ -4,13 +4,14 @@ import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import is from 'is_js';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 // function validateEmail(email) {
 //     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 //     return re.test(String(email).toLowerCase());
 // }
 
-const Auth = () => {
+const Auth = (props) => {
     const [state, setState] = useState({
         isFormValid: false,
         formControls: {
@@ -41,17 +42,17 @@ const Auth = () => {
     })
 
     const loginHandler = async () => {
-        const authData  = {
-            email: state.formControls.email.value,
-            password: state.formControls.password.value,
-            returnSecureToken: true
-        }
-        try {
-            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDf-9OEcpP32LMHmZMdj2zy-hPJjxlyyTw', authData)
-            console.log(response.data)
-        } catch (e) {
-            console.log(e)
-        }
+        props.auth(
+            state.formControls.email.value,
+            state.formControls.password.value,
+            true
+        )
+        // try {
+        //     const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDf-9OEcpP32LMHmZMdj2zy-hPJjxlyyTw', authData)
+        //     console.log(response.data)
+        // } catch (e) {
+        //     console.log(e)
+        // }
     }
 
     const registerHandler = async () => {
@@ -163,4 +164,10 @@ const Auth = () => {
     );
 };
 
-export default Auth;
+function mapDispatchToProps(dispatch) {
+    return {
+        auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Auth);
