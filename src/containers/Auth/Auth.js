@@ -20,6 +20,7 @@ const Auth = props => {
                 type: 'email',
                 label: 'Email',
                 icon: 'fal fa-user-alt',
+                placeholder: 'Type your email',
                 errorMessage: '@mail.ru, @gmail.com и т.д... ',
                 valid: false,
                 touched: false,
@@ -33,6 +34,7 @@ const Auth = props => {
                 type: 'password',
                 label: 'Пароль',
                 icon: 'fal fa-lock',
+                placeholder: 'Type your password',
                 errorMessage: 'Минимальная длина пароля 6 символов.',
                 valid: false,
                 touched: false,
@@ -122,6 +124,7 @@ const Auth = props => {
                     touched={control.touched}
                     label={control.label}
                     icon={control.icon}
+                    placeholder={control.placeholder}
                     shouldValidate={!!control.validation}
                     errorMessage={control.errorMessage}
                     onChange={event => onChangeHandler(event, controlName)}
