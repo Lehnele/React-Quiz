@@ -11,7 +11,7 @@ import {auth} from '../../store/actions/auth';
 //     return re.test(String(email).toLowerCase());
 // }
 
-const Auth = (props) => {
+const Auth = props => {
     const [state, setState] = useState({
         isFormValid: false,
         formControls: {
