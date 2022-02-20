@@ -19,7 +19,8 @@ const Auth = (props) => {
                 value: '',
                 type: 'email',
                 label: 'Email',
-                errorMessage: 'Окончание @mail.ru, @gmail.com и т.д...',
+                icon: 'fal fa-user-alt',
+                errorMessage: '@mail.ru, @gmail.com и т.д... ',
                 valid: false,
                 touched: false,
                 validation: {
@@ -31,7 +32,8 @@ const Auth = (props) => {
                 value: '',
                 type: 'password',
                 label: 'Пароль',
-                errorMessage: 'Минимальная длина пароля 6 символов',
+                icon: 'fal fa-lock',
+                errorMessage: 'Минимальная длина пароля 6 символов.',
                 valid: false,
                 touched: false,
                 validation: {
@@ -119,6 +121,7 @@ const Auth = (props) => {
                     valid={control.valid}
                     touched={control.touched}
                     label={control.label}
+                    icon={control.icon}
                     shouldValidate={!!control.validation}
                     errorMessage={control.errorMessage}
                     onChange={event => onChangeHandler(event, controlName)}
@@ -130,10 +133,10 @@ const Auth = (props) => {
     return (
         <div className={classes.Auth}>
             <div>
+
                 <h1>Авторизация</h1>
 
                 <form onSubmit={submitHandler} className={classes.AuthForm}>
-
                     {
                         props.authError
                             ? <span><i className='far fa-exclamation-triangle'/>Ошибка. Попробуйте снова.</span>

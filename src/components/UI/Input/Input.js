@@ -20,22 +20,33 @@ const Input = props => {
                 {props.label}
             </label>
 
-            <input
-                type={inputType}
-                id={htmlFor}
-                // key={props.key}
-                value={props.value}
-                onChange={props.onChange}
-            />
 
-            {
-                isInvalid(props)
-                    ? <span>
-                        <i className='fas fa-exclamation'/>
-                        {props.errorMessage || 'Неверные значения'}
-                </span>
-                    : null
-            }
+            {/*<i className="fal fa-lock"></i>*/}
+
+
+
+            <div>
+                <i className={props.icon}></i>
+                <input
+                    type={inputType}
+                    id={htmlFor}
+                    // key={props.key}
+                    value={props.value}
+                    onChange={props.onChange}
+                />
+                {
+                    isInvalid(props)
+                        ? <div className={classes.alert_warning}>
+                            <span>
+                                {props.errorMessage || 'Неверные значения'}
+                            </span>
+                            &nbsp;
+                            <i className="fas fa-exclamation-circle"/>
+                        </div>
+                        : null
+                }
+            </div>
+
         </div>
     );
 };

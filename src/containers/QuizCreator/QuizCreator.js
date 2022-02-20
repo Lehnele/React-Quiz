@@ -112,7 +112,6 @@ const QuizCreator = (props) => {
                         errorMessage={control.errorMessage}
                         onChange={event => changeHandler(event.target.value, controlName)}
                     />
-                    { index === 0 ? <hr/> : null }
                 </>
             )
         })

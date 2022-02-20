@@ -20,7 +20,6 @@ export default function authReducer(state = initialState, action) {
                 authError: false
             }
         case AUTH_ERROR:
-            console.log('Nu da...')
             return {
                 ...state,
                 authError: true

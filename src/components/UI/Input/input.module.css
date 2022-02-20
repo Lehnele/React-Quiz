@@ -1,34 +1,75 @@
 .Input {
     margin-bottom: 15px;
+    border-bottom: 1px solid #000;
 }
 
 .Input label {
+    font-size: 14px;
+    font-weight: 300;
     margin-bottom: 3px;
     padding: 0px;
     display: block;
 }
 
+.Input div {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.Input div i {
+    font-size: 13px ;
+}
+
 .Input input {
     display: block;
     box-sizing: border-box;
-    border: 1px solid #bebebe;
-    paddding: 7px;
-    margin: 0 0 5px;
+
     width: 100%;
     outline: none;
+    border: none;
     transition: all .3s ease-in-out;
+    padding: 0 0 0 8px;
 }
 
-.Input span {
+.alert_warning{
+    border-radius: 1px;
+    position: absolute;
+    padding: 1px;
     color: #f01f30;
-    font-size: 12px;
-    font-weight: bold;
+    border: 1px solid rgba(0,0,0,0)
+}
+
+.alert_warning i{
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert_warning:hover{
+    /*background: rgb(248, 215, 218);*/
+    border: 1px solid #f01f30;
+    transition-duration: 700ms;
+}
+
+.alert_warning:hover span{
+    display: block;
+    /*visibility: visible;*/
+    transition-duration: 700ms;
+}
+
+.alert_warning span {
+    font-size: 8px;
+    /*visibility: hidden;*/
+    display: none;
 }
 
 /*.Input.invalid label {*/
 /*    color: #f01f30;*/
 /*}*/
 
-.Input i {
-    color: #f01f30;
-}
+/*.Input i {*/
+/*    color: #f01f30;*/
+/*}*/
