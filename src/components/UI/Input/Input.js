@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './input.module.css';
 
 function isInvalid({valid, touched, shouldValidate}) {
-    return !valid && shouldValidate && touched
+    return !valid && touched && shouldValidate
 }
 
 const Input = props => {
@@ -10,23 +10,30 @@ const Input = props => {
     const cls = [classes.Input]
     const htmlFor = `${inputType}-${Math.random()}`
 
-    if(isInvalid(props)) {
-        cls.push(classes.invalid)
-    }
+    // if(isInvalid(props)) {
+    //     cls.push(classes.invalid)
+    // }
 
     return (
         <div className={cls.join(' ')}>
-            <label htmlFor={htmlFor}>{props.label}</label>
+            <label htmlFor={htmlFor}>
+                {props.label}
+            </label>
+
             <input
                 type={inputType}
                 id={htmlFor}
+                // key={props.key}
                 value={props.value}
                 onChange={props.onChange}
             />
 
             {
                 isInvalid(props)
-                    ? <span>{props.errorMessage || 'Неверные значения'}</span>
+                    ? <span>
+                        <i className='fas fa-exclamation'/>
+                        {props.errorMessage || 'Неверные значения'}
+                </span>
                     : null
             }
         </div>

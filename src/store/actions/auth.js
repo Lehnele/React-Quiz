@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AUTH_LOGOUT, AUTH_SUCCESS } from './actionTypes';
+import {AUTH_ERROR, AUTH_LOGOUT, AUTH_SUCCESS} from './actionTypes';
 
 export function auth(email, password, isLogin) {
     return async dispatch => {
@@ -15,18 +15,28 @@ export function auth(email, password, isLogin) {
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDf-9OEcpP32LMHmZMdj2zy-hPJjxlyyTw'
         }
 
-        const response = await axios.post(url, authData)
-        const data = response.data
+        try {
+            const response = await axios.post(url, authData)
+            const data = response.data
 
-        const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1e3)
+            const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1e3)
 
-        localStorage.setItem('token', data.idToken)
-        localStorage.setItem('userID', data.localId)
-        localStorage.setItem('expirationDate', expirationDate)
+            localStorage.setItem('token', data.idToken)
+            localStorage.setItem('userID', data.localId)
+            localStorage.setItem('expirationDate', expirationDate)
 
-        dispatch(authSuccess(data.idToken))
-        dispatch(autoLogout(data.expiresIn))
+            dispatch(authSuccess(data.idToken))
+            dispatch(autoLogout(data.expiresIn))
+        } catch (e) {
+            dispatch(authError())
+        }
 
+    }
+}
+
+export function authError() {
+    return {
+        type: AUTH_ERROR
     }
 }
 

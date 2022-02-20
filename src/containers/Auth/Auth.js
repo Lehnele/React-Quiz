@@ -4,7 +4,7 @@ import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import is from 'is_js';
 import { connect } from 'react-redux';
-import { auth } from '../../store/actions/auth';
+import {auth} from '../../store/actions/auth';
 
 // function validateEmail(email) {
 //     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -19,7 +19,7 @@ const Auth = (props) => {
                 value: '',
                 type: 'email',
                 label: 'Email',
-                errorMessage: 'Введите корректный email',
+                errorMessage: 'Окончание @mail.ru, @gmail.com и т.д...',
                 valid: false,
                 touched: false,
                 validation: {
@@ -31,7 +31,7 @@ const Auth = (props) => {
                 value: '',
                 type: 'password',
                 label: 'Пароль',
-                errorMessage: 'Введите корректный пароль',
+                errorMessage: 'Минимальная длина пароля 6 символов',
                 valid: false,
                 touched: false,
                 validation: {
@@ -107,6 +107,10 @@ const Auth = (props) => {
         return Object.keys(state.formControls).map((controlName,index) => {
             const control = state.formControls[controlName]
 
+            // if (props.authError) {
+            //     control.value = ''
+            // }
+
             return (
                 <Input
                     key={controlName + index}
@@ -130,6 +134,12 @@ const Auth = (props) => {
 
                 <form onSubmit={submitHandler} className={classes.AuthForm}>
 
+                    {
+                        props.authError
+                            ? <span><i className='far fa-exclamation-triangle'/>Ошибка. Попробуйте снова.</span>
+                            : null
+                    }
+
                     { renderInputs() }
 
                     <Button
@@ -152,10 +162,16 @@ const Auth = (props) => {
     );
 };
 
+function mapStateToProps(state) {
+    return {
+        authError: state.auth.authError
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

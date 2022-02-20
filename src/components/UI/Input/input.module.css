@@ -25,6 +25,10 @@
     font-weight: bold;
 }
 
-.Input.invalid label {
+/*.Input.invalid label {*/
+/*    color: #f01f30;*/
+/*}*/
+
+.Input i {
     color: #f01f30;
 }

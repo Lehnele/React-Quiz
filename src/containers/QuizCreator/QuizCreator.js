@@ -103,7 +103,7 @@ const QuizCreator = (props) => {
                 <>
                     <Input
                         index={controlName + index}
-
+                        // key={index}
                         label={control.label}
                         value={control.value}
                         valid={control.valid}

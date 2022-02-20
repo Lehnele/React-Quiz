@@ -15,7 +15,7 @@ const Quiz = (props) => {
         return () => {
             props.retryQuiz()
         };
-    }, [id])
+    }, [])
 
     return (
         <div className={classes.Quiz}>

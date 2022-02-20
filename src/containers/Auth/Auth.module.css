@@ -24,3 +24,7 @@
     padding: 15px;
     border-radius: 5px;
 }
+
+.AuthForm > span {
+    color: #f01f30;
+}
