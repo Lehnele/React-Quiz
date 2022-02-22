@@ -101,13 +101,14 @@ export function retryQuiz() {
 }
 
 export function quizAnswerClick(answerId) {
+
     return (dispatch, getState) => {
         const state = getState().quiz
 
         // debug double click
         if(state.answerState) {
             const key = Object.keys(state.answerState)[0]
-            if(state.answerState[key] === 'success') {
+            if(state.answerState[key] === 'success' || 'error') {
                 return
             }
         }
@@ -140,6 +141,14 @@ export function quizAnswerClick(answerId) {
                 results
             ))
 
+            const timeout = window.setTimeout(() => {
+                if(isQuizFinished(state)) {
+                    dispatch(finishQuiz())
+                } else {
+                    dispatch(quizNextQuestion(state.activeQuestion + 1))
+                }
+                window.clearTimeout(timeout)
+            }, 1000)
         }
     }
 }

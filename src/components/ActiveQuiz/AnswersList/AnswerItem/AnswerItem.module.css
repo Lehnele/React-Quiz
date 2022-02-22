@@ -4,10 +4,11 @@
     padding: 5px 10px;
     margin-bottom: 5px;
     cursor: pointer;
+    background: rgba(255, 255, 255, .1);
 }
 
 .AnswerItem:hover {
-    background: rgba(255, 255, 255, .2);
+    background: rgba(255, 255, 255, .4);
     transition: background .3s ease-in-out;
 }
 
